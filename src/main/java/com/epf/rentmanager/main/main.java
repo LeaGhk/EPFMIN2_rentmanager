@@ -1,3 +1,5 @@
+//cd c/Users/Ghanotakis/Documents/EPF/EPF_2023_cours_S8/1_Java/rentmanager
+
 package com.epf.rentmanager.main;
 
 import com.epf.rentmanager.dao.ClientDao;
