@@ -38,27 +38,22 @@ public class main {
             System.out.println(i);
             System.out.println(ClientService.getInstance().count());
 
-
+            // Trouver un client
 //            System.out.println("Entrez l'ID du client : ");
 //            long idClient = sc.nextLong();
 //            Client client = ClientService.getInstance().findById(idClient);
 //            System.out.println(client);
-
+            // Trouver une voiture
 //            System.out.println("Entrez l'ID du véhicule : ");
 //            long idVehicle = sc.nextLong();
 //            Vehicle vehicle = VehicleService.getInstance().findById(idVehicle);
 //            System.out.println(vehicle);
 
-//            List<Reservation> reservations = ReservationDao.getInstance().findAll();
-//            System.out.println(reservations);
-
+            // Créer une voiture et un client
 //            Vehicle v = new Vehicle(1, "Cons", "modl", 4);
 //            VehicleService.getInstance().create(v);
-//
 //            Client c = new Client("HHHHHA", "Chloé", LocalDate.now(), "depi@epf.fr");
 //            ClientService.getInstance().create(c);
-//            clients = ClientService.getInstance().findAll();
-//            System.out.println(clients);
 
 //            ClientDao.getInstance().delete(clients.get(4));
 //            VehicleService.getInstance().delete((vehicles.get(4)));
