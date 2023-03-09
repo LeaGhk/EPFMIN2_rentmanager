@@ -129,10 +129,18 @@ public class ReservationDao {
 	}
 
 	public int count() throws DaoException, SQLException {
-		Connection connection = ConnectionManager.getConnection();
-		Statement statement = connection.createStatement();
-		ResultSet rs = statement.executeQuery(COUNT_RESERVATIONS_QUERY);
-		rs.next();
-		return rs.getInt("count");
+		int n;
+		try{
+			Connection connection = ConnectionManager.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(COUNT_RESERVATIONS_QUERY);
+			rs.next();
+			n = rs.getInt("count");
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+			throw new DaoException();
+		}
+		return n;
 	}
 }

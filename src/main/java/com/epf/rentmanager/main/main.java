@@ -36,6 +36,7 @@ public class main {
 
             int i = ReservationService.getInstance().count();
             System.out.println(i);
+            System.out.println(ClientService.getInstance().count());
 
 
 //            System.out.println("Entrez l'ID du client : ");
@@ -54,8 +55,10 @@ public class main {
 //            Vehicle v = new Vehicle(1, "Cons", "modl", 4);
 //            VehicleService.getInstance().create(v);
 //
-//            Client c = new Client(1, "dpe", "Chloé", LocalDate.parse("2000-12-12"), "depi@epf.fr");
+//            Client c = new Client("HHHHHA", "Chloé", LocalDate.now(), "depi@epf.fr");
 //            ClientService.getInstance().create(c);
+//            clients = ClientService.getInstance().findAll();
+//            System.out.println(clients);
 
 //            ClientDao.getInstance().delete(clients.get(4));
 //            VehicleService.getInstance().delete((vehicles.get(4)));

@@ -18,8 +18,19 @@ public class Client {
         this.email = email;
     }
 
-    public Client() {
+    public Client() {    }
+    public Client(String nom, String prenom, String email){
+        this.nom = nom;
+        this.prenom = prenom;
+//        this.naissance = dateNaissance;
+        this.email = email;
+    }
 
+    public Client(String nom, String prenom, LocalDate dateNaissance, String email){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.naissance = dateNaissance;
+        this.email = email;
     }
 
     public long getId() {return id;}

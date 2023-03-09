@@ -122,11 +122,19 @@ public class VehicleDao {
 	}
 	
 	public int count() throws DaoException, SQLException {
+		int n;
+		try {
 		Connection connection = ConnectionManager.getConnection();
 		Statement statement = connection.createStatement();
 		ResultSet rs = statement.executeQuery(COUNT_VEHICLES_QUERY);
 		rs.next();
-		return rs.getInt("count");
+		n = rs.getInt("count");
+		connection.close();
+	}catch (SQLException e){
+		e.printStackTrace();
+		throw new DaoException();
+	}
+		return n;
 	}
 
 }
