@@ -17,13 +17,13 @@ public class VehicleService {
 		this.vehicleDao = VehicleDao.getInstance();
 	}
 	
-	public static VehicleService getInstance() {
-		if (instance == null) {
-			instance = new VehicleService();
-		}
-		
-		return instance;
-	}
+//	public static VehicleService getInstance() {
+//		if (instance == null) {
+//			instance = new VehicleService();
+//		}
+//
+//		return instance;
+//	}
 
 	public long create(Vehicle vehicle) throws ServiceException {
 		try{

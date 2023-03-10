@@ -51,18 +51,18 @@ public class RentCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        try {
-            int veh = parseInt(request.getParameter("car"));
-            int cli = parseInt(request.getParameter("client"));
+//        try {
+//            int veh = parseInt(request.getParameter("car"));
+//            int cli = parseInt(request.getParameter("client"));
 
-            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-            Date deb = DateFor.parse(request.getParameter("begin"));
+//            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+//            Date deb = DateFor.parse(request.getParameter("begin"));
 
 //            String deb = request.getParameter("begin");
 //            deb = deb.replace('/', '-');
 //           LocalDate debu = LocalDate.parse(deb);
 
-            System.out.println("AAAAA "+deb);
+//            System.out.println("AAAAA "+deb);
 //            LocalDate fin = LocalDate.parse(request.getParameter("end"));
 //
 //            Vehicle v = vehicleService.findById(veh);
@@ -80,9 +80,9 @@ public class RentCreateServlet extends HttpServlet {
         this.doGet(request, response);
 
 //        response.sendRedirect("/rentmanager/users");
-    } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+//    } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
     }

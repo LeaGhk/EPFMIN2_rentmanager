@@ -20,12 +20,12 @@ public class ReservationService {
         this.reservationDao = ReservationDao.getInstance();
     }
 
-    public static ReservationService getInstance() {
-        if (instance == null) {
-            instance = new ReservationService();
-        }
-        return instance;
-    }
+//    public static ReservationService getInstance() {
+//        if (instance == null) {
+//            instance = new ReservationService();
+//        }
+//        return instance;
+//    }
 
 
     public long create(Reservation reservation) throws ServiceException {

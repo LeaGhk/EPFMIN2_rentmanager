@@ -18,7 +18,9 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ReservationDao {
 
 	private static ReservationDao instance = null;
