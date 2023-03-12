@@ -22,12 +22,13 @@ public class ClientDao {
 	private static ClientDao instance = null;
 	private ClientDao() {}
 
-	public static ClientDao getInstance() {
-		if(instance == null) {
-			instance = new ClientDao();
-		}
-		return instance;
-	}
+
+//	public static ClientDao getInstance() {
+//		if(instance == null) {
+//			instance = new ClientDao();
+//		}
+//		return instance;
+//	}
 	
 	private static final String CREATE_CLIENT_QUERY = "INSERT INTO Client(nom, prenom, email, naissance) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_CLIENT_QUERY = "DELETE FROM Client WHERE id=?;";
