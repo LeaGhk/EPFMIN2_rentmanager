@@ -27,6 +27,7 @@ public class HomeServlet extends HttpServlet {
 
 
 		try {
+			// mettre en atttribut client vehicle et rez
 			ClientService clientService = ClientService.getInstance();
 			int nbClients = clientService.count();
 			request.setAttribute("nbClients", nbClients);

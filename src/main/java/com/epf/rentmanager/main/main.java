@@ -65,10 +65,11 @@ public class main {
 //            System.out.println(vehicles);
 
               // Créer + ajouter réservation --------------------------------------------------
-//            Client c = ClientService.getInstance().findById(3);
-//            Vehicle v = VehicleService.getInstance().findById(2);
-//            Reservation r = new Reservation(1, c, v,LocalDate.parse("2000-12-12"),LocalDate.parse("2000-12-12"));
+//            Client c = ClientService.getInstance().findById(1);
+//            Vehicle v = VehicleService.getInstance().findById(3);
+//            Reservation r = new Reservation(1, c, v,LocalDate.parse("2000-03-12"),LocalDate.parse("2000-12-12"));
 //            ReservationService.getInstance().create(r);
+
 
 
         } catch (ServiceException e) {

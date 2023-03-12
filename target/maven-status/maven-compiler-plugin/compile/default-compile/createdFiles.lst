@@ -1,4 +1,5 @@
 com\epf\rentmanager\servlet\UserDetailsServlet.class
+com\epf\rentmanager\servlet\RentCreateServlet.class
 com\epf\rentmanager\servlet\VehicleCreateServlet.class
 com\epf\rentmanager\servlet\UserCreateServlet.class
 com\epf\rentmanager\servlet\VehicleDeleteServlet.class
