@@ -40,6 +40,7 @@ public class main {
             int i = ReservationService.getInstance().count();
             System.out.println(i);
             System.out.println(ClientService.getInstance().count());
+            //test
 
             // Trouver un client --------------------------------------------------
 //            System.out.println("Entrez l'ID du client : ");
