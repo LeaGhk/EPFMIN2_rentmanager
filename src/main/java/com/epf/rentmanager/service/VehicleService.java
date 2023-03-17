@@ -14,7 +14,7 @@ public class VehicleService {
 
 	private VehicleDao vehicleDao;
 	public static VehicleService instance;
-	private VehicleService(VehicleDao vehicleDao){
+	public VehicleService(VehicleDao vehicleDao){
 		this.vehicleDao = vehicleDao;
 	}
 	
