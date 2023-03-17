@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class VehicleDao {
 	
-	private static VehicleDao instance = null;
+//	private static VehicleDao instance = null;
 	private VehicleDao() {}
 
 //	public static VehicleDao getInstance() {

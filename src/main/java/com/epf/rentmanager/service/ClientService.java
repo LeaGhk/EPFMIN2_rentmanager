@@ -15,7 +15,6 @@ public class ClientService {
 
 	private ClientDao clientDao;
 
-	public static ClientService instance;
 	public ClientService(ClientDao clientDao){
 		this.clientDao = clientDao;
 	}

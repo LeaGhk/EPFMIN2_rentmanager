@@ -23,22 +23,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReservationDao {
 
-	private static ReservationDao instance = null;
 	private ClientDao clientDao;
 	private VehicleDao vehicleDao;
-	private ReservationDao() {}
 
 	public ReservationDao(ClientDao clientDao, VehicleDao vehicleDao) {
 		this.clientDao = clientDao;
 		this.vehicleDao = vehicleDao;
 	}
-
-	//	public static ReservationDao getInstance() {
-//		if(instance == null) {
-//			instance = new ReservationDao();
-//		}
-//		return instance;
-//	}
 	
 	private static final String CREATE_RESERVATION_QUERY = "INSERT INTO Reservation(client_id, vehicle_id, debut, fin) VALUES(?, ?, ?, ?);";
 	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
@@ -151,5 +142,16 @@ public class ReservationDao {
 			throw new DaoException();
 		}
 		return n;
+	}
+
+	public List<Reservation> findListByIdClient(int id) throws DaoException {
+		List<Reservation> reservations = findAll();
+		List<Reservation> resClient = new ArrayList<>();
+		for(int i=0; i<reservations.size(); i++){
+			if (reservations.get(i).getClient().getId() == id){
+				resClient.add(reservations.get(i));
+			}
+		}
+		return resClient;
 	}
 }

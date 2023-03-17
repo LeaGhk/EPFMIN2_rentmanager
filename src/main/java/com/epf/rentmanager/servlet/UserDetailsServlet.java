@@ -9,6 +9,8 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -30,9 +32,17 @@ public class UserDetailsServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
+    @Autowired
     private ClientService clientService;
+    @Autowired
     private ReservationService reservationService;
+    @Autowired
     private VehicleService vehicleService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +52,7 @@ public class UserDetailsServlet extends HttpServlet {
             // afficher les voitures du client
             Client c = clientService.findById(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("client", c);
-
+//             request.setAttribute("reservations", reservationService.findListByIdClient(Integer.parseInt(request.getParameter("id"))));
             List<Reservation> reservations = reservationService.findAll();
             List<Reservation> resClient = new ArrayList<>();
             for(int i=0; i<reservations.size(); i++){
@@ -53,7 +63,7 @@ public class UserDetailsServlet extends HttpServlet {
             request.setAttribute("reservations", resClient);
             request.setAttribute("nbReservations", resClient.size());
 
-//            List<Vehicle> vehicles = vehicleService.findAll();
+
 
             List<Vehicle> vehicles = new ArrayList<>();
 
@@ -64,25 +74,6 @@ public class UserDetailsServlet extends HttpServlet {
                     vehicles.add(reservations.get(i).getVehicle());
                 }
             }
-//            List<Vehicle> vClient = new ArrayList<>();
-//            vClient.add(vehicles.get(0));
-//            for(int i=0; i<vehicles.size(); i++){
-//                if(vClient.get(i).getId() == vehicles.get(i).getId()){
-//                    vClient.add(vehicles.get(i));
-//
-//                }
-//            }
-
-//            List<Vehicle> vClient = new ArrayList<>();
-//            List<Vehicle> v = new ArrayList<>();
-//            v.add(vehicles.get(1));
-//            for(int i=1; i<vehicles.size(); i++){
-//                for(int j=i; j<vehicles.size(); j++){
-//                    if(vehicles.get(i).getId() == vehicles.get(j).getId()){
-//
-//                    }
-//                }
-//            }
 
 
 
