@@ -6,6 +6,8 @@ import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,7 +25,13 @@ public class RentListServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
-    private ReservationService reservationService = ReservationService.getInstance();
+    @Autowired
+    private ReservationService reservationService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

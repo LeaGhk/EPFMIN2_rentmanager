@@ -7,10 +7,12 @@ com\epf\rentmanager\service\VehicleService.class
 com\epf\rentmanager\persistence\ConnectionManager.class
 com\epf\rentmanager\dao\ReservationDao.class
 com\epf\rentmanager\servlet\VehicleCreateServlet.class
+com\epf\rentmanager\configuration\WebConfiguration.class
 com\epf\rentmanager\servlet\UserCreateServlet.class
 com\epf\rentmanager\model\Vehicle.class
 com\epf\rentmanager\servlet\HomeServlet.class
 com\epf\rentmanager\dao\ClientDao.class
+com\epf\rentmanager\configuration\AppConfiguration.class
 com\epf\rentmanager\main\main.class
 com\epf\rentmanager\service\ReservationService.class
 com\epf\rentmanager\utils\IOUtils.class

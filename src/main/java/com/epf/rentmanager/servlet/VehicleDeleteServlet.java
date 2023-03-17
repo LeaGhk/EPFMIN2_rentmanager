@@ -5,6 +5,8 @@ import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,6 +24,13 @@ public class VehicleDeleteServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
+    @Autowired
+    private VehicleService vehicleService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,7 +38,6 @@ public class VehicleDeleteServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            VehicleService vehicleService = VehicleService.getInstance();
             vehicleService.delete(vehicleService.findById(id));
             response.sendRedirect("/rentmanager/cars");
         } catch (ServiceException e) {

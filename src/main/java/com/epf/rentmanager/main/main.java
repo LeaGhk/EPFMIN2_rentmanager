@@ -36,12 +36,12 @@ public class main {
 
 
         // Afficher TOUS clients / vehicles / reservations --------------------------------------------------
-//            List<Client> clients = ClientService.findAll();
 //            System.out.println(clients);
 //            List<Vehicle> vehicles = VehicleService.getInstance().findAll();
 //            System.out.println(vehicles);
 //            List<Reservation> res = ReservationService.getInstance().findAll();
-//            System.out.println(res);
+//            System.out.println(res);/            List<Client> clients = ClientService.findAll();
+//
 //
 //            int i = ReservationService.getInstance().count();
 //            System.out.println(i);
