@@ -37,9 +37,7 @@ public class UserDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            // compter le nombre de réservations du client
             // compter le nombre de voitures différentes que le client a utilisé
-
             // afficher les voitures du client
             Client c = clientService.findById(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("client", c);
@@ -56,19 +54,25 @@ public class UserDetailsServlet extends HttpServlet {
 
 //            List<Vehicle> vehicles = vehicleService.findAll();
 
-
-
             List<Vehicle> vehicles = new ArrayList<>();
 
-//            for(int i=0; i<reservations.size(); i++) {
-//                System.out.println("vehicle  " + reservations.get(i).getVehicle().getId());
-////&& !vehicles.contains(reservations.get(i).getVehicle())
-//                if (reservations.get(i).getClient().getId() == c.getId()) {
-//                    vehicles.add(reservations.get(i).getVehicle());
+            for(int i=0; i<reservations.size(); i++) {
+                System.out.println("vehicle  " + reservations.get(i).getVehicle().getId());
+//&& !vehicles.contains(reservations.get(i).getVehicle())
+                if (reservations.get(i).getClient().getId() == c.getId()) {
+                    vehicles.add(reservations.get(i).getVehicle());
+                }
+            }
+//            List<Vehicle> vClient = new ArrayList<>();
+//            vClient.add(vehicles.get(0));
+//            for(int i=0; i<vehicles.size(); i++){
+//                if(vClient.get(i).getId() == vehicles.get(i).getId()){
+//                    vClient.add(vehicles.get(i));
+//
 //                }
 //            }
 
-            List<Vehicle> vClient = new ArrayList<>();
+//            List<Vehicle> vClient = new ArrayList<>();
 //            List<Vehicle> v = new ArrayList<>();
 //            v.add(vehicles.get(1));
 //            for(int i=1; i<vehicles.size(); i++){
