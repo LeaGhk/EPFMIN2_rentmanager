@@ -8,6 +8,8 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 //import jdk.vm.ci.meta.Local;
 
 import java.io.IOException;
@@ -33,9 +35,17 @@ public class RentCreateServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
-    private ReservationService reservationService = ReservationService.getInstance();
-    private VehicleService vehicleService = VehicleService.getInstance();
-    private ClientService clientService = ClientService.getInstance();
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private VehicleService vehicleService;
+    @Autowired
+    private ClientService clientService;
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,18 +61,18 @@ public class RentCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        try {
-            int veh = parseInt(request.getParameter("car"));
-            int cli = parseInt(request.getParameter("client"));
+//        try {
+//            int veh = parseInt(request.getParameter("car"));
+//            int cli = parseInt(request.getParameter("client"));
 
-            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-            Date deb = DateFor.parse(request.getParameter("begin"));
+//            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+//            Date deb = DateFor.parse(request.getParameter("begin"));
 
 //            String deb = request.getParameter("begin");
 //            deb = deb.replace('/', '-');
 //           LocalDate debu = LocalDate.parse(deb);
 
-            System.out.println("AAAAA "+deb);
+//            System.out.println("AAAAA "+deb);
 //            LocalDate fin = LocalDate.parse(request.getParameter("end"));
 //
 //            Vehicle v = vehicleService.findById(veh);
@@ -80,9 +90,9 @@ public class RentCreateServlet extends HttpServlet {
         this.doGet(request, response);
 
 //        response.sendRedirect("/rentmanager/users");
-    } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+//    } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
     }

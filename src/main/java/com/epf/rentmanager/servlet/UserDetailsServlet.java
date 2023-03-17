@@ -1,3 +1,4 @@
+
 package com.epf.rentmanager.servlet;
 
 import com.epf.rentmanager.exception.DaoException;
@@ -29,9 +30,9 @@ public class UserDetailsServlet extends HttpServlet {
      *
      */
     private static final long serialVersionUID = 1L;
-    private ClientService clientService = ClientService.getInstance();
-    private ReservationService reservationService = ReservationService.getInstance();
-    private VehicleService vehicleService = VehicleService.getInstance();
+    private ClientService clientService;
+    private ReservationService reservationService;
+    private VehicleService vehicleService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -96,3 +97,4 @@ public class UserDetailsServlet extends HttpServlet {
     }
 
 }
+
