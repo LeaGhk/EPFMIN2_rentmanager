@@ -40,9 +40,9 @@ public class ClientService {
 		}
 	}
 
-	public long delete(Client client) throws ServiceException {
+	public void delete(Client client) throws ServiceException {
 		try{
-			return clientDao.delete(client);
+			clientDao.delete(client);
 		}catch(DaoException e){
 			e.printStackTrace();
 			throw new ServiceException();
@@ -68,6 +68,10 @@ public class ClientService {
 
 	public int count() throws DaoException, SQLException {
 		return clientDao.count();
+	}
+
+	public void update(Client client){
+		clientDao.update(client);
 	}
 	
 }

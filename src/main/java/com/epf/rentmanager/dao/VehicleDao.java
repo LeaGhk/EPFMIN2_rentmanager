@@ -111,16 +111,13 @@ public class VehicleDao {
 				int nb_places = rs.getInt("nb_places");
 
 				vehicles.add(new Vehicle(id, constructeur, modele, nb_places));
-
 			}
 			connection.close();
 		}catch (SQLException e){
 			e.printStackTrace();
 			throw new DaoException();
 		}
-
 		return vehicles;
-		
 	}
 	
 	public int count() throws DaoException, SQLException {
@@ -137,6 +134,29 @@ public class VehicleDao {
 		throw new DaoException();
 	}
 		return n;
+	}
+
+	public List<Vehicle> findByIdc(long idc) throws DaoException {
+		List<Vehicle> vehicles = new ArrayList<Vehicle>();
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(FIND_VEHICLE_QUERY);
+			preparedStatement.setLong(1, idc);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()){
+				int id = rs.getInt("id");
+				String constructeur = rs.getString("constructeur");
+				String modele = rs.getString("modele");
+				int nb_places = rs.getInt("nb_places");
+				vehicles.add(new Vehicle(id, constructeur, modele, nb_places));
+			}
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+			throw new DaoException();
+		}
+		return vehicles;
 	}
 
 }

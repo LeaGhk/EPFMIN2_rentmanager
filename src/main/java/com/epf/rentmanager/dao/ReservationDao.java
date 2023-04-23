@@ -67,7 +67,6 @@ public class ReservationDao {
 	public long delete(Reservation reservation) throws DaoException {
 		return 0;
 	}
-
 	
 	public List<Reservation> findResaByClientId(long clientId) throws DaoException {
 		List<Reservation> reservations = new ArrayList<Reservation>();
@@ -80,24 +79,63 @@ public class ReservationDao {
 			while(rs.next()){
 				long id = rs.getLong("id");
 				Client client = clientDao.findById(clientId);
-				long vehicle_id =rs.getLong("vehicle_id");
+				long vehicle_id = rs.getLong("vehicle_id");
 				Vehicle vehicle = vehicleDao.findById(vehicle_id);
 				LocalDate debut = rs.getDate("debut").toLocalDate();
 				LocalDate fin = rs.getDate("fin").toLocalDate();
-
 				reservations.add(new Reservation(id, client, vehicle, debut, fin));
 			}
 			connection.close();
-		}catch (SQLException e){
+		} catch (SQLException e){
 			e.printStackTrace();
 			throw new DaoException();
 		}
-
 		return reservations;
 	}
-	
-	public List<Reservation> findResaByVehicleId(long vehicleId) throws DaoException {
-		return new ArrayList<Reservation>();
+
+	public List<Vehicle> findByIdc(long idc) throws DaoException {
+		List<Vehicle> vehicles = new ArrayList<Vehicle>();
+		List<Reservation> reservations = findResaByClientId(idc);
+		for(int i=0; i<reservations.size(); i++){
+//			if(vehicles.contains(reservations.get(i).getVehicle())==false){
+			vehicles.add(reservations.get(i).getVehicle());
+//			}
+		}
+		for(int i=0; i<vehicles.size()-1; i++){
+			for(int j=i+1; j<vehicles.size(); j++){
+				if(vehicles.get(i).getId() == vehicles.get(j).getId()){
+					vehicles.remove(j);
+				}
+			}
+		}
+		return vehicles;
+	}
+	public List<Reservation> findResaByVehicleId(long vehicleId) throws DaoException, SQLException {
+		// à tester, pas sur que le chiffre soit 1 pr prepared statement
+		List<Reservation> reservations = new ArrayList<Reservation>();
+
+		try {
+		Connection connection = ConnectionManager.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVATIONS_BY_VEHICLE_QUERY);
+		preparedStatement.setLong(1, vehicleId);
+		ResultSet rs = preparedStatement.executeQuery();
+
+		while(rs.next()){
+			long id = rs.getLong("id");
+			long client_id = rs.getLong("client_id");
+			Client client = clientDao.findById(client_id);
+			Vehicle vehicle = vehicleDao.findById(vehicleId);
+			LocalDate debut = rs.getDate("debut").toLocalDate();
+			LocalDate fin = rs.getDate("fin").toLocalDate();
+			reservations.add(new Reservation(id, client, vehicle, debut, fin));
+		}
+		connection.close();
+
+		} catch (SQLException e){
+			e.printStackTrace();
+			throw new DaoException();
+		}
+		return reservations;
 	}
 
 	public List<Reservation> findAll() throws DaoException {
@@ -144,6 +182,7 @@ public class ReservationDao {
 		return n;
 	}
 
+	//je crois que c'est exactement la meme chose que findResaByIdClient mais sans la query ?
 	public List<Reservation> findListByIdClient(int id) throws DaoException {
 		List<Reservation> reservations = findAll();
 		List<Reservation> resClient = new ArrayList<>();

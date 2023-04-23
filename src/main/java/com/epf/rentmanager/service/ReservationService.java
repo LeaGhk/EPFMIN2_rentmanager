@@ -7,6 +7,8 @@ import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Reservation;
+import com.epf.rentmanager.model.Vehicle;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -54,4 +56,11 @@ public class ReservationService {
         return reservationDao.findListByIdClient(id);
     }
 
+    public List<Vehicle> findByIdc(long idc) throws DaoException {
+        return  reservationDao.findByIdc(idc);
+    }
+
+    public List<Reservation> findResaByClientId(long clientId) throws DaoException {
+        return reservationDao.findResaByClientId(clientId);
+    }
 }

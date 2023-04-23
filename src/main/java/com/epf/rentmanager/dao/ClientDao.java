@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.epf.rentmanager.exception.DaoException;
+import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.persistence.ConnectionManager;
+import com.epf.rentmanager.service.ReservationService;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -33,7 +35,7 @@ public class ClientDao {
 	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM Client;";
-
+	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom = ?, prenom = ?, email = ?, naissance = ? WHERE id = ?";
 
 	public long create(Client client) throws DaoException {
 		try {
@@ -61,7 +63,7 @@ public class ClientDao {
 		return 0;
 	}
 	
-	public long delete(Client client) throws DaoException {
+	public void delete(Client client) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(DELETE_CLIENT_QUERY);
@@ -74,9 +76,24 @@ public class ClientDao {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-		return 0;
 	}
 
+	public void update(Client client){
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(UPDATE_CLIENT_QUERY);
+			ps.setString(1, client.getNom());
+			ps.setString(2, client.getPrenom());
+			ps.setString(3, client.getEmail());
+			ps.setString(4, String.valueOf(client.getNaissance()));
+
+			ps.executeUpdate();
+			ps.close();
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
 	public Client findById(long id) throws DaoException {
 		Client client = new Client();
 		try {

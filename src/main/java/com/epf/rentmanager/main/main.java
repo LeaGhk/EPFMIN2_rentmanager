@@ -27,20 +27,23 @@ import java.util.Scanner;
 
 public class main {
 
-    public static void main(String [] args) throws SQLException {
+    public static void main(String [] args) throws SQLException, ServiceException {
 
         Scanner sc = new Scanner(System.in);
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
         ClientService clientService = context.getBean(ClientService.class);
         VehicleService vehicleService = context.getBean(VehicleService.class);
+        ReservationService reservationService = context.getBean(ReservationService.class);
 
 
         // Afficher TOUS clients / vehicles / reservations --------------------------------------------------
+//            List<Client> clients = clientService.findAll();
 //            System.out.println(clients);
 //            List<Vehicle> vehicles = VehicleService.getInstance().findAll();
 //            System.out.println(vehicles);
-//            List<Reservation> res = ReservationService.getInstance().findAll();
-//            System.out.println(res);/            List<Client> clients = ClientService.findAll();
+//            List<Reservation> res = reservationService.findAll();
+//            System.out.println(res);
+
 //
 //
 //            int i = ReservationService.getInstance().count();

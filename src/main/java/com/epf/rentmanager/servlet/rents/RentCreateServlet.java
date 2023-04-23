@@ -1,4 +1,4 @@
-package com.epf.rentmanager.servlet;
+package com.epf.rentmanager.servlet.rents;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;

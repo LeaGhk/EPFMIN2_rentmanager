@@ -28,7 +28,7 @@
                                     <b>Reservation(s)</b> <a class="pull-right">${nbReservations}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Voiture(s)</b> <a class="pull-right">3</a>
+                                    <b>Voiture(s)</b> <a class="pull-right">${nbVehicles}</a>
                                 </li>
                             </ul>
                         </div>
@@ -86,19 +86,6 @@
                                             <td>${veh.nb_places}</td>
                                         </tr>
                                         </c:forEach>
-
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Peugeot</td>
-                                            <td>206</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Volkswagen</td>
-                                            <td>Touran</td>
-                                            <td>7</td>
-                                        </tr>
                                     </table>
                                 </div>
                             </div>

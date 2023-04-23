@@ -1,5 +1,5 @@
 
-package com.epf.rentmanager.servlet;
+package com.epf.rentmanager.servlet.users;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
