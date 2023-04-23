@@ -48,38 +48,20 @@ public class UserDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            // compter le nombre de voitures différentes que le client a utilisé
-            // afficher les voitures du client
-            Client c = clientService.findById(Integer.parseInt(request.getParameter("id")));
+            long idc = Integer.parseInt(request.getParameter("id"));
+            Client c = clientService.findById(idc);
+            List<Reservation> listRes = reservationService.findResaByClientId(idc);
+            List<Vehicle> listVeh = reservationService.findByIdc(idc);
+
             request.setAttribute("client", c);
-//             request.setAttribute("reservations", reservationService.findListByIdClient(Integer.parseInt(request.getParameter("id"))));
-            List<Reservation> reservations = reservationService.findAll();
-            List<Reservation> resClient = new ArrayList<>();
-            for(int i=0; i<reservations.size(); i++){
-                if (reservations.get(i).getClient().getId() == c.getId()){
-                    resClient.add(reservations.get(i));
-                }
-            }
-            request.setAttribute("reservations", resClient);
-            request.setAttribute("nbReservations", resClient.size());
-
-
-
-            List<Vehicle> vehicles = new ArrayList<>();
-
-            for(int i=0; i<reservations.size(); i++) {
-                System.out.println("vehicle  " + reservations.get(i).getVehicle().getId());
-//&& !vehicles.contains(reservations.get(i).getVehicle())
-                if (reservations.get(i).getClient().getId() == c.getId()) {
-                    vehicles.add(reservations.get(i).getVehicle());
-                }
-            }
-
-
-
-            request.setAttribute("vehicles", vehicles);
+            request.setAttribute("reservations", listRes);
+            request.setAttribute("nbReservations", listRes.size());
+            request.setAttribute("vehicles", listVeh);
+            request.setAttribute("nbVehicles", listVeh.size());
 
         } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        } catch (DaoException e) {
             throw new RuntimeException(e);
         }
 
