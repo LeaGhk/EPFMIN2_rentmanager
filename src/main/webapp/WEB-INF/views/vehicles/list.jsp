@@ -44,10 +44,10 @@
                                     <td>${vehicle.nb_places}</td>
 
                                     <td>
-                                        <a class="btn btn-primary" href="car-detail.html">
+                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/cars/details?id=${vehicle.id}">
                                             <i class="fa fa-play"></i>
                                         </a>
-                                        <a class="btn btn-success" href="#">
+                                        <a class="btn btn-success" href="${pageContext.request.contextPath}/cars/update?id=${vehicle.id}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <a class="btn btn-danger" href="${pageContext.request.contextPath}/cars/delete?id=${vehicle.id}">

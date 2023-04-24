@@ -35,7 +35,6 @@ public class main {
         VehicleService vehicleService = context.getBean(VehicleService.class);
         ReservationService reservationService = context.getBean(ReservationService.class);
 
-
         // Afficher TOUS clients / vehicles / reservations --------------------------------------------------
 //            List<Client> clients = clientService.findAll();
 //            System.out.println(clients);

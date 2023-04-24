@@ -28,19 +28,19 @@ public class UserUpdateServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
+    int id = 0;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            if(request.getParameter("id") != null){
-                int id = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("idc", id);
-                request.setAttribute("client", clientService.findById(id));
-            }
+
+            id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("idc", id);
+            request.setAttribute("client", clientService.findById(id));
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/update.jsp").forward(request, response);
 
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
     }
@@ -51,12 +51,10 @@ public class UserUpdateServlet extends HttpServlet {
         String email = request.getParameter("email");
         LocalDate naissance = LocalDate.parse(request.getParameter("naissance"));
 
-        Client c = new Client(lastName, firstName, naissance, email);
+        Client c = new Client(id, lastName, firstName, naissance, email);
         clientService.update(c);
 
-
         response.sendRedirect("/rentmanager/users");
-//        this.doGet(request, response);
     }
 
 

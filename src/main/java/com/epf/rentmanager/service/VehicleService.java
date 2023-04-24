@@ -69,4 +69,8 @@ public class VehicleService {
 	public int count() throws DaoException, SQLException {
 		return vehicleDao.count();
 	}
+
+    public long update(Vehicle vehicle) {
+		return vehicleDao.update(vehicle);
+    }
 }

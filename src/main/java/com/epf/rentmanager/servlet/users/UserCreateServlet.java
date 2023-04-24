@@ -53,8 +53,8 @@ public class UserCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        this.doGet(request, response);
-//        response.sendRedirect("/rentmanager/users");
+//        this.doGet(request, response);
+        response.sendRedirect("/rentmanager/users");
     }
 
 

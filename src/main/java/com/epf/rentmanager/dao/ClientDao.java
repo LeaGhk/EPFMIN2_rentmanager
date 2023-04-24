@@ -35,7 +35,7 @@ public class ClientDao {
 	private static final String FIND_CLIENT_QUERY = "SELECT nom, prenom, email, naissance FROM Client WHERE id=?;";
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM Client;";
-	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom = ?, prenom = ?, email = ?, naissance = ? WHERE id = ?";
+	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom = ?, prenom = ?, email = ?, naissance = ? WHERE id = ?;";
 
 	public long create(Client client) throws DaoException {
 		try {
@@ -78,7 +78,7 @@ public class ClientDao {
 		}
 	}
 
-	public void update(Client client){
+	public long update(Client client){
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(UPDATE_CLIENT_QUERY);
@@ -86,6 +86,7 @@ public class ClientDao {
 			ps.setString(2, client.getPrenom());
 			ps.setString(3, client.getEmail());
 			ps.setString(4, String.valueOf(client.getNaissance()));
+			ps.setLong(5, client.getId());
 
 			ps.executeUpdate();
 			ps.close();
@@ -93,6 +94,7 @@ public class ClientDao {
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
+		return 0;
 	}
 	public Client findById(long id) throws DaoException {
 		Client client = new Client();

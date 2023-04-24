@@ -2,6 +2,7 @@ package com.epf.rentmanager.servlet.vehicles;
 
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
@@ -12,6 +13,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,12 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import static java.lang.Integer.parseInt;
 
-@WebServlet("/cars/create")
-public class VehicleCreateServlet extends HttpServlet {
+@WebServlet("/cars/update")
+public class VehicleUpdateServlet extends HttpServlet {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     @Autowired
     private VehicleService vehicleService;
@@ -38,27 +37,32 @@ public class VehicleCreateServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
+    int id = 0;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
         try {
-            String marque = request.getParameter("manufacturer");
-            String modele = request.getParameter("modele");
-            int seats = parseInt(request.getParameter("seats"));
-            Vehicle v = new Vehicle(marque, modele, seats);
-            vehicleService.create(v);
+            id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("idc", id);
+            request.setAttribute("vehicle", vehicleService.findById(id));
+
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/update.jsp").forward(request, response);
+
         } catch (ServiceException e) {
-            //catch le probleme pousser dans la requete et afficher sur le site le prb
             throw new RuntimeException(e);
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String marque = request.getParameter("manufacturer");
+        String modele = request.getParameter("modele");
+        int seats = parseInt(request.getParameter("seats"));
+
+        Vehicle v = new Vehicle(id, marque, modele, seats);
+        vehicleService.update(v);
 
         response.sendRedirect("/rentmanager/cars");
     }
 
 
-    }
+}

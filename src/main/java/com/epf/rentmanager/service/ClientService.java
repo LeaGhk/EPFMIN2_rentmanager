@@ -70,8 +70,8 @@ public class ClientService {
 		return clientDao.count();
 	}
 
-	public void update(Client client){
-		clientDao.update(client);
+	public long update(Client client){
+		return clientDao.update(client);
 	}
 	
 }
