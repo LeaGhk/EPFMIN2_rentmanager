@@ -6,6 +6,7 @@ import java.util.List;
 import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
 //import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -17,32 +18,32 @@ public class ReservationService {
     private final ReservationDao reservationDao;
     public static ReservationService instance;
 
-    public ReservationService(ReservationDao reservationDao){
+    public ReservationService(ReservationDao reservationDao) {
         this.reservationDao = reservationDao;
     }
 
     public long create(Reservation reservation) throws ServiceException {
-        try{
+        try {
             return reservationDao.create(reservation);
-        }catch(DaoException e){
+        } catch (DaoException e) {
             e.printStackTrace();
             throw new ServiceException();
         }
     }
 
     public long delete(Reservation reservation) throws ServiceException {
-        try{
+        try {
             return reservationDao.delete(reservation);
-        }catch(DaoException e){
+        } catch (DaoException e) {
             e.printStackTrace();
             throw new ServiceException();
         }
     }
 
     public List<Reservation> findAll() throws ServiceException {
-        try{
+        try {
             return reservationDao.findAll();
-        }catch(DaoException e){
+        } catch (DaoException e) {
             e.printStackTrace();
             throw new ServiceException();
         }
@@ -56,11 +57,19 @@ public class ReservationService {
         return reservationDao.findListByIdClient(id);
     }
 
-    public List<Vehicle> findByIdc(long idc) throws DaoException {
-        return  reservationDao.findByIdc(idc);
+    public List<Vehicle> findResaVehiclesByIdc(long idc) throws DaoException {
+        return reservationDao.findResaVehiclesByIdc(idc);
     }
 
     public List<Reservation> findResaByClientId(long clientId) throws DaoException {
         return reservationDao.findResaByClientId(clientId);
+    }
+
+    public List<Reservation> findResaByVehicleId(long vehicleId) throws DaoException, SQLException {
+        return reservationDao.findResaByVehicleId(vehicleId);
+    }
+
+    public List<Client> findResaClientsByIdv(long idv) throws SQLException, DaoException {
+        return reservationDao.findResaClientsByIdv(idv);
     }
 }

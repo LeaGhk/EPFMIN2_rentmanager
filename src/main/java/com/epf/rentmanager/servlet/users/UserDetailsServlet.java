@@ -47,7 +47,7 @@ public class UserDetailsServlet extends HttpServlet {
             long idc = Integer.parseInt(request.getParameter("id"));
             Client c = clientService.findById(idc);
             List<Reservation> listRes = reservationService.findResaByClientId(idc);
-            List<Vehicle> listVeh = reservationService.findByIdc(idc);
+            List<Vehicle> listVeh = reservationService.findResaVehiclesByIdc(idc);
 
             request.setAttribute("client", c);
             request.setAttribute("reservations", listRes);

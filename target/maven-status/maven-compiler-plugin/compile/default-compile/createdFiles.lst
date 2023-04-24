@@ -23,7 +23,7 @@ com\epf\rentmanager\service\ReservationService.class
 com\epf\rentmanager\utils\IOUtils.class
 com\epf\rentmanager\persistence\FillDatabase.class
 com\epf\rentmanager\servlet\users\UserUpdateServlet.class
-com\epf\rentmanager\exception\EntreeErrorException.class
+com\epf\rentmanager\servlet\vehicles\VehicleDetailsServlet.class
 com\epf\rentmanager\service\ClientService.class
 com\epf\rentmanager\servlet\vehicles\VehicleDeleteServlet.class
 com\epf\rentmanager\dao\VehicleDao.class

@@ -11,13 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.epf.rentmanager.exception.DaoException;
-import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
-import com.epf.rentmanager.service.ClientService;
-import com.epf.rentmanager.service.VehicleService;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -93,7 +90,7 @@ public class ReservationDao {
 		return reservations;
 	}
 
-	public List<Vehicle> findByIdc(long idc) throws DaoException {
+	public List<Vehicle> findResaVehiclesByIdc(long idc) throws DaoException {
 		List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		List<Reservation> reservations = findResaByClientId(idc);
 		for(int i=0; i<reservations.size(); i++){
@@ -110,8 +107,8 @@ public class ReservationDao {
 		}
 		return vehicles;
 	}
+
 	public List<Reservation> findResaByVehicleId(long vehicleId) throws DaoException, SQLException {
-		// à tester, pas sur que le chiffre soit 1 pr prepared statement
 		List<Reservation> reservations = new ArrayList<Reservation>();
 
 		try {
@@ -138,6 +135,21 @@ public class ReservationDao {
 		return reservations;
 	}
 
+	public List<Client> findResaClientsByIdv (long idv) throws SQLException, DaoException {
+		List<Client> clients = new ArrayList<Client>();
+		List<Reservation> reservations = findResaByVehicleId(idv);
+		for(int i=0; i<reservations.size(); i++){
+			clients.add(reservations.get(i).getClient());
+		}
+		for(int i=0; i<clients.size()-1; i++){
+			for(int j=i+1; j<clients.size(); j++){
+				if(clients.get(i).getId() == clients.get(j).getId()){
+					clients.remove(j);
+				}
+			}
+		}
+		return clients;
+	}
 	public List<Reservation> findAll() throws DaoException {
 		List<Reservation> reservations = new ArrayList<Reservation>();
 		try {
