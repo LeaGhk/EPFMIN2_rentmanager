@@ -17,18 +17,6 @@ public class VehicleService {
 	public VehicleService(VehicleDao vehicleDao){
 		this.vehicleDao = vehicleDao;
 	}
-	
-//	private VehicleService() {
-//		this.vehicleDao = VehicleDao.getInstance();
-//	}
-	
-//	public static VehicleService getInstance() {
-//		if (instance == null) {
-//			instance = new VehicleService();
-//		}
-//
-//		return instance;
-//	}
 
 	public long create(Vehicle vehicle) throws ServiceException {
 		try{

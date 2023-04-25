@@ -6,10 +6,8 @@ import com.epf.rentmanager.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Calendar;
 import java.util.List;
 
 @Component

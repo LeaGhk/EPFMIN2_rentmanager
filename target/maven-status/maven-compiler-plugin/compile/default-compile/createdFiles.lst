@@ -14,8 +14,10 @@ com\epf\rentmanager\servlet\rents\RentCreateServlet.class
 com\epf\rentmanager\servlet\rents\RentDeleteServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleListServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleCreateServlet.class
+com\epf\rentmanager\exception\MajeurException.class
 com\epf\rentmanager\servlet\users\UserDetailsServlet.class
 com\epf\rentmanager\servlet\rents\RentListServlet.class
+com\epf\rentmanager\exception\MailUseException.class
 com\epf\rentmanager\servlet\users\UserListServlet.class
 com\epf\rentmanager\main\main.class
 com\epf\rentmanager\servlet\users\UserCreateServlet.class

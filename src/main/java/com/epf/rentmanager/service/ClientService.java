@@ -1,15 +1,13 @@
 package com.epf.rentmanager.service;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.epf.rentmanager.dao.ClientDao;
-import com.epf.rentmanager.dao.VehicleDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.List;
 @Service
 public class ClientService {
 
