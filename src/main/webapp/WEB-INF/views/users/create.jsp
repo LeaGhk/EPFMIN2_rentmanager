@@ -9,6 +9,13 @@
     <!-- Left side column. contains the logo and sidebar -->
     <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
 
+<c:if test="${message != null}">
+<script type="text/javascript">
+    var msg = "${message}";
+    alert(msg);
+</script>
+</c:if>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -31,28 +38,28 @@
                                 <div class="form-group">
                                     <label for="last_name" class="col-sm-2 control-label">Nom</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nom" required>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Nom" required pattern=".{3,}" value="${nom}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="first_name" class="col-sm-2 control-label">Prenom</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Prenom" required>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Prenom" required pattern=".{3,}" value="${prenom}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="${email}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="naissance" class="col-sm-2 control-label">Date de naissance</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="naissance" name="naissance" required>
+                                        <input type="date" class="form-control" id="naissance" name="naissance" required value="${naissance}">
                                     </div>
                                 </div>
 

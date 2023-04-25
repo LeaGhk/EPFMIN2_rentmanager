@@ -17,15 +17,19 @@ import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import com.epf.rentmanager.validator.ClientValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class main {
+    @Autowired
 
     public static void main(String [] args) throws SQLException, ServiceException {
 
@@ -34,9 +38,11 @@ public class main {
         ClientService clientService = context.getBean(ClientService.class);
         VehicleService vehicleService = context.getBean(VehicleService.class);
         ReservationService reservationService = context.getBean(ReservationService.class);
+        ClientValidator clientValidator = new ClientValidator();
+
 
         // Afficher TOUS clients / vehicles / reservations --------------------------------------------------
-//            List<Client> clients = clientService.findAll();
+            List<Client> clients = clientService.findAll();
 //            System.out.println(clients);
 //            List<Vehicle> vehicles = VehicleService.getInstance().findAll();
 //            System.out.println(vehicles);
@@ -53,8 +59,15 @@ public class main {
         // Trouver un client --------------------------------------------------
 //            System.out.println("Entrez l'ID du client : ");
 //            long idClient = sc.nextLong();
-//            Client client = ClientService.getInstance().findById(idClient);
-//            System.out.println(client);
+//            List<Client> clients = new ArrayList<>();
+//            clients.add(clientService.findById(2));
+//            clients.add(clientService.findById(3));
+//            Client client = clientService.findById(3);
+            Client client = new Client("HHHHHA", "Chloé", LocalDate.now(), "depi@epf.fr");
+
+        System.out.println(client);
+            boolean a = clientValidator.verifMailUtilise(client, clients);
+            System.out.println("aaa"+a);
         // Trouver une voiture --------------------------------------------------
 //            System.out.println("Entrez l'ID du véhicule : ");
 //            long idVehicle = sc.nextLong();

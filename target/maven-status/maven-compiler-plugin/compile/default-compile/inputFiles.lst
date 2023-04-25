@@ -1,5 +1,6 @@
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\vehicles\VehicleListServlet.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\exception\MajeurException.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\HomeServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\configuration\AppConfiguration.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\persistence\ConnectionManager.java
@@ -11,12 +12,15 @@ C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\users\UserDetailsServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\vehicles\VehicleDeleteServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\main\main.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\rents\RentDeleteServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\model\Client.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\vehicles\VehicleDetailsServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\rents\RentCreateServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\persistence\FillDatabase.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\dao\VehicleDao.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\exception\ServiceException.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\model\Vehicle.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\exception\MailUseException.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\service\VehicleService.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\dao\ReservationDao.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\model\Reservation.java
@@ -25,4 +29,7 @@ C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\exception\DaoException.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\configuration\WebConfiguration.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\users\UserCreateServlet.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\rents\RentsUpdateServlet.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\servlet\vehicles\VehicleUpdateServlet.java
 C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\service\ClientService.java
+C:\Users\Ghanotakis\Documents\EPF\EPF_2023_cours_S8\1_Java\rentmanager\src\main\java\com\epf\rentmanager\validator\ClientValidator.java
