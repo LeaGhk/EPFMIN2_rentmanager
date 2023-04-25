@@ -24,6 +24,10 @@ public class Reservation {
         this.fin = fin;
     }
 
+    public Reservation(){
+
+    }
+
     public long getId() {return id;}
     public Client getClient() {return client;}
     public Vehicle getVehicle() {return vehicle;}

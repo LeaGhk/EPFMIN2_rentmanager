@@ -43,7 +43,7 @@ public class VehicleUpdateServlet extends HttpServlet {
 
         try {
             id = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("idc", id);
+            request.setAttribute("idv", id);
             request.setAttribute("vehicle", vehicleService.findById(id));
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/update.jsp").forward(request, response);

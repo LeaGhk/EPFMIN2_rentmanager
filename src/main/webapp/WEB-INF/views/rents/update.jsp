@@ -14,7 +14,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Reservations
+                Reservation ${idr}
             </h1>
         </section>
 
@@ -25,7 +25,7 @@
                     <!-- Horizontal Form -->
                     <div class="box">
                         <!-- form start -->
-                        <form class="form-horizontal" method="post" action="/rentmanager/rents/create">
+                        <form class="form-horizontal" method="post" action="/rentmanager/rents/update">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="car" class="col-sm-2 control-label">Voiture</label>
@@ -33,7 +33,15 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
                                         <c:forEach items="${vehicles}" var="vehicle">
-                                            <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
+                                            <c:choose>
+                                                <c:when test="${vehicle.id == reservation.vehicle.id}">
+                                                    <option value="${vehicle.id}" selected>${vehicle.constructeur} ${vehicle.modele}</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                         </c:forEach>
                                         </select>
                                     </div>
@@ -44,7 +52,14 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="client" name="client">
                                         <c:forEach items="${clients}" var="client">
-                                            <option value="${client.id}">${client.prenom} ${client.nom}</option>
+                                            <c:choose>
+                                                <c:when test="${client.id == reservation.client.id}">
+                                                    <option value="${client.id}" selected> ${client.prenom} ${client.nom}</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${client.id}">${client.prenom} ${client.nom}</option>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:forEach>
                                         </select>
                                     </div>
@@ -53,20 +68,20 @@
                                     <label for="begin" class="col-sm-2 control-label">Date de debut</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="begin" name="begin" required>
+                                        <input type="date" class="form-control" id="begin" name="begin"  value="${reservation.debut}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="end" class="col-sm-2 control-label">Date de fin</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="end" name="end" required>
+                                        <input type="date" class="form-control" id="end" name="end"  value="${reservation.fin}" required>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Ajouter</button>
+                                <button type="submit" class="btn btn-info pull-right">Modifier</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>

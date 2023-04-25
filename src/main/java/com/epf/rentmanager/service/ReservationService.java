@@ -49,7 +49,15 @@ public class ReservationService {
         }
     }
 
-    public int count() throws DaoException, SQLException {
+    public Reservation findById(long id) throws DaoException {
+        return reservationDao.findById(id);
+    }
+
+    public long update(Reservation reservation){
+        return reservationDao.update(reservation);
+    }
+
+        public int count() throws DaoException, SQLException {
         return reservationDao.count();
     }
 
@@ -72,4 +80,6 @@ public class ReservationService {
     public List<Client> findResaClientsByIdv(long idv) throws SQLException, DaoException {
         return reservationDao.findResaClientsByIdv(idv);
     }
+
+
 }

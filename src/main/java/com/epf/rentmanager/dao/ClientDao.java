@@ -69,7 +69,6 @@ public class ClientDao {
 			PreparedStatement ps = connection.prepareStatement(DELETE_CLIENT_QUERY);
 			ps.setLong(1, client.getId());
 			ps.execute();
-			ps.executeUpdate();
 			ps.close();
 			connection.close();
 		}catch (SQLException e){
@@ -96,6 +95,7 @@ public class ClientDao {
 		}
 		return 0;
 	}
+
 	public Client findById(long id) throws DaoException {
 		Client client = new Client();
 		try {

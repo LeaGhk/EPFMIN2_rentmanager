@@ -11,6 +11,7 @@ com\epf\rentmanager\servlet\HomeServlet.class
 com\epf\rentmanager\dao\ClientDao.class
 com\epf\rentmanager\configuration\AppConfiguration.class
 com\epf\rentmanager\servlet\rents\RentCreateServlet.class
+com\epf\rentmanager\servlet\rents\RentDeleteServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleListServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleCreateServlet.class
 com\epf\rentmanager\servlet\users\UserDetailsServlet.class
@@ -25,6 +26,8 @@ com\epf\rentmanager\persistence\FillDatabase.class
 com\epf\rentmanager\servlet\users\UserUpdateServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleDetailsServlet.class
 com\epf\rentmanager\service\ClientService.class
+com\epf\rentmanager\servlet\rents\RentsUpdateServlet.class
 com\epf\rentmanager\servlet\vehicles\VehicleDeleteServlet.class
 com\epf\rentmanager\dao\VehicleDao.class
 com\epf\rentmanager\model\Client.class
+com\epf\rentmanager\validator\ClientValidator.class

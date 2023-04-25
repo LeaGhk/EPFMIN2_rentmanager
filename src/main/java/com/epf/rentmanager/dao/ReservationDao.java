@@ -33,11 +33,13 @@ public class ReservationDao {
 	private static final String FIND_RESERVATIONS_BY_CLIENT_QUERY = "SELECT id, vehicle_id, debut, fin FROM Reservation WHERE client_id=?;";
 	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
+	private static final String FIND_RESERVATION_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE id=?;";
 	private static final String COUNT_RESERVATIONS_QUERY = "SELECT COUNT(id) AS count FROM Reservation;";
+	private static final String UPDATE_RESERVATION_QUERY = "UPDATE Reservation SET client_id = ?, vehicle_id = ?, debut = ?, fin = ? WHERE id = ?;";
+
 
 	public long create(Reservation reservation) throws DaoException {
 		try {
-
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(CREATE_RESERVATION_QUERY, Statement.RETURN_GENERATED_KEYS);
 			ps.setLong(1, reservation.getClient().getId());
@@ -62,9 +64,68 @@ public class ReservationDao {
 	}
 	
 	public long delete(Reservation reservation) throws DaoException {
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(DELETE_RESERVATION_QUERY);
+			ps.setLong(1, reservation.getId());
+			ps.execute();
+			ps.close();
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+			throw new DaoException();
+		}
 		return 0;
 	}
-	
+
+	public Reservation findById(long id) throws DaoException {
+		Reservation reservation = new Reservation();
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVATION_QUERY);
+			preparedStatement.setLong(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()){
+				long idClient = rs.getLong("client_id");
+				long idVehicle = rs.getLong("vehicle_id");
+				Client client = clientDao.findById(idClient);
+				Vehicle vehicle = vehicleDao.findById(idVehicle);
+				LocalDate debut = rs.getDate("debut").toLocalDate();
+				LocalDate fin = rs.getDate("fin").toLocalDate();
+				reservation = new Reservation(id, client, vehicle, debut, fin);
+			}
+			rs.close();
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+			throw new DaoException();
+		} catch (DaoException e) {
+			throw new RuntimeException(e);
+		}
+		return reservation;
+	}
+
+	public long update(Reservation reservation){
+		try {
+			Connection connection = ConnectionManager.getConnection();
+			PreparedStatement ps = connection.prepareStatement(UPDATE_RESERVATION_QUERY);
+			ps.setLong(1, reservation.getClient().getId());
+			ps.setLong(2, reservation.getVehicle().getId());
+			ps.setString(3, String.valueOf(reservation.getDebut()));
+			ps.setString(4, String.valueOf(reservation.getFin()));
+			ps.setLong(5, reservation.getId());
+
+			ps.executeUpdate();
+			ps.close();
+			connection.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
 	public List<Reservation> findResaByClientId(long clientId) throws DaoException {
 		List<Reservation> reservations = new ArrayList<Reservation>();
 		try {
@@ -150,6 +211,7 @@ public class ReservationDao {
 		}
 		return clients;
 	}
+
 	public List<Reservation> findAll() throws DaoException {
 		List<Reservation> reservations = new ArrayList<Reservation>();
 		try {
@@ -161,7 +223,6 @@ public class ReservationDao {
 				int id = rs.getInt("id");
 				long idClient = rs.getLong("client_id");
 				long idVehicle = rs.getLong("vehicle_id");
-				// il faut changer ClientService.getInstance par ca ?
 				Client client = clientDao.findById(idClient);
 				Vehicle vehicle = vehicleDao.findById(idVehicle);
 				LocalDate debut = rs.getDate("debut").toLocalDate();
@@ -169,6 +230,7 @@ public class ReservationDao {
 
 				reservations.add(new Reservation(id, client, vehicle, debut, fin));
 			}
+			rs.close();
 			connection.close();
 		}catch (SQLException e){
 			e.printStackTrace();

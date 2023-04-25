@@ -44,6 +44,7 @@ public class UserCreateServlet extends HttpServlet {
             String email = request.getParameter("email");
             LocalDate naissance = LocalDate.parse(request.getParameter("naissance"));
 
+
             Client c = new Client(lastName, firstName, naissance, email);
             clientService.create(c);
         }
