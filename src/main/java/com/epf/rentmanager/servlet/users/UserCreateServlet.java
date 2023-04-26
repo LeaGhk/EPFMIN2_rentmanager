@@ -1,7 +1,7 @@
 package com.epf.rentmanager.servlet.users;
 
-import com.epf.rentmanager.exception.MailUseException;
-import com.epf.rentmanager.exception.MajeurException;
+import com.epf.rentmanager.exception.VerifMailException;
+import com.epf.rentmanager.exception.UserIs18yearsException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
@@ -49,9 +49,9 @@ public class UserCreateServlet extends HttpServlet {
 
             Client c = new Client(lastName, firstName, naissance, email);
             if(ClientValidator.userIs18years(c)){
-                throw new MajeurException("L'utilisateur doit être majeur");
+                throw new UserIs18yearsException("L'utilisateur doit être majeur");
             }else if(ClientValidator.verifMailUtilise(c, clientService.findAll())) {
-                throw new MailUseException("Cette adresse mail est déjà utilisée");
+                throw new VerifMailException("Cette adresse mail est déjà utilisée");
             }
 
             clientService.create(c);
@@ -59,13 +59,13 @@ public class UserCreateServlet extends HttpServlet {
         }
         catch (ServiceException e) {
             throw new RuntimeException(e);
-        } catch (MajeurException e) {
+        } catch (UserIs18yearsException e) {
             request.setAttribute("message", "L'utilisateur doit être majeur");
             request.setAttribute("nom", request.getParameter("last_name"));
             request.setAttribute("prenom", request.getParameter("first_name"));
             request.setAttribute("email", request.getParameter("email"));
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/create.jsp").forward(request, response);
-        } catch (MailUseException e) {
+        } catch (VerifMailException e) {
             request.setAttribute("message", "Cette adresse mail est déjà utilisée");
             request.setAttribute("nom", request.getParameter("last_name"));
             request.setAttribute("prenom", request.getParameter("first_name"));

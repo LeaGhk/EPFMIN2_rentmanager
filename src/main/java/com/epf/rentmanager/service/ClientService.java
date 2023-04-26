@@ -4,6 +4,7 @@ import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.model.Reservation;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -26,9 +27,9 @@ public class ClientService {
 		}
 	}
 
-	public void delete(Client client) throws ServiceException {
+	public void delete(Client client, List<Reservation> reservations) throws ServiceException {
 		try{
-			clientDao.delete(client);
+			clientDao.delete(client, reservations);
 		}catch(DaoException e){
 			e.printStackTrace();
 			throw new ServiceException();

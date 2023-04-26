@@ -24,6 +24,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -63,11 +65,6 @@ public class main {
 //            clients.add(clientService.findById(2));
 //            clients.add(clientService.findById(3));
 //            Client client = clientService.findById(3);
-            Client client = new Client("HHHHHA", "Chloé", LocalDate.now(), "depi@epf.fr");
-
-        System.out.println(client);
-            boolean a = clientValidator.verifMailUtilise(client, clients);
-            System.out.println("aaa"+a);
         // Trouver une voiture --------------------------------------------------
 //            System.out.println("Entrez l'ID du véhicule : ");
 //            long idVehicle = sc.nextLong();
@@ -98,6 +95,12 @@ public class main {
 //        } catch (DaoException e) {
 //            throw new RuntimeException(e);
 //        }
+
+        LocalDate dBefore = LocalDate.parse("2018-05-21", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate dAfter = LocalDate.parse("2018-05-12", DateTimeFormatter.ISO_LOCAL_DATE);
+
+        long diff = dBefore.until(dAfter, ChronoUnit.DAYS);
+        System.out.println("difference is : "+diff +" days");
 
 
     }

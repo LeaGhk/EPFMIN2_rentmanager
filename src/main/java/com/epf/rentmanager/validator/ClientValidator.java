@@ -2,8 +2,6 @@ package com.epf.rentmanager.validator;
 
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
-import com.epf.rentmanager.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -12,8 +10,9 @@ import java.util.List;
 
 @Component
 public class ClientValidator {
-    @Autowired
-    private static ClientService clientService;
+
+    // si tout va bien boolean = false
+    // si probleme (mail utilisé ou mineur) boolean = true
 
     public static boolean userIs18years(Client client){
         Period period = Period.between(client.getNaissance(), LocalDate.now());

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/rents/update")
-public class RentsUpdateServlet extends HttpServlet {
+public class RentUpdateServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     @Autowired

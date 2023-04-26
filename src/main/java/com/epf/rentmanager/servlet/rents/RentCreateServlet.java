@@ -1,12 +1,16 @@
 package com.epf.rentmanager.servlet.rents;
 
+import com.epf.rentmanager.exception.CarUsePerDayException;
+import com.epf.rentmanager.exception.DebutIsBeforeFin;
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.exception.CarRent7joursException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import com.epf.rentmanager.validator.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -33,6 +37,7 @@ public class RentCreateServlet extends HttpServlet {
     private VehicleService vehicleService;
     @Autowired
     private ClientService clientService;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -58,18 +63,35 @@ public class RentCreateServlet extends HttpServlet {
             int cli = parseInt(request.getParameter("client"));
             LocalDate deb = LocalDate.parse(request.getParameter("begin"));
             LocalDate fin = LocalDate.parse(request.getParameter("end"));
-
             Vehicle v = vehicleService.findById(veh);
             Client c = clientService.findById(cli);
-
             Reservation r = new Reservation(c, v, deb, fin);
+
+            if(ReservationValidator.carRent7jours(r)){
+                throw new CarRent7joursException();
+            } else if(ReservationValidator.carUsePerDay(r, reservationService.findAll())) {
+                throw new CarUsePerDayException();
+            } else if(ReservationValidator.debutIsBeforeFin(r)){
+                throw new DebutIsBeforeFin();
+            }
+
             reservationService.create(r);
+            response.sendRedirect("/rentmanager/rents");
         }
         catch (ServiceException e) {
             throw new RuntimeException(e);
+        } catch (CarRent7joursException e) {
+            request.setAttribute("message", "La location dure 7 jours max");
+            request.setAttribute("vehicle", request.getParameter("car"));
+            request.setAttribute("client", request.getParameter("client"));
+            doGet(request,response);
+        } catch (CarUsePerDayException e) {
+            request.setAttribute("message", "La voiture est déjà louée à ces dates-là");
+            doGet(request,response);
+        } catch (DebutIsBeforeFin e) {
+            request.setAttribute("message", "La date de début doit être avant la date de fin.");
+            doGet(request,response);
         }
-
-        response.sendRedirect("/rentmanager/rents");
 
     }
 }
