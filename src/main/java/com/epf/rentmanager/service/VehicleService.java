@@ -1,21 +1,24 @@
 package com.epf.rentmanager.service;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.epf.rentmanager.dao.VehicleDao;
 import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
-import com.epf.rentmanager.dao.VehicleDao;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class VehicleService {
 
-	private VehicleDao vehicleDao;
-	public static VehicleService instance;
-	public VehicleService(VehicleDao vehicleDao){
+	private final VehicleDao vehicleDao;
+	private final ReservationService reservationService;
+
+	public VehicleService(VehicleDao vehicleDao, ReservationService reservationService){
 		this.vehicleDao = vehicleDao;
+		this.reservationService = reservationService;
 	}
 
 	public long create(Vehicle vehicle) throws ServiceException {
@@ -29,6 +32,12 @@ public class VehicleService {
 
 	public long delete(Vehicle vehicle) throws ServiceException {
 		try{
+			List<Reservation> reservations = reservationService.findAll();
+			for(int i=0; i<reservations.size(); i++){
+				if(reservations.get(i).getVehicle().getId() == vehicle.getId()){
+					reservationService.delete(reservations.get(i));
+				}
+			}
 			return vehicleDao.delete(vehicle);
 		}catch(DaoException e){
 			e.printStackTrace();

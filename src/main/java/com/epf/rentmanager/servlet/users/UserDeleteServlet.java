@@ -37,13 +37,11 @@ public class UserDeleteServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            clientService.delete(clientService.findById(id), reservationService.findAll());
+            clientService.delete(clientService.findById(id));
             response.sendRedirect("/rentmanager/users");
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
-
-//        this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
 
     }
 

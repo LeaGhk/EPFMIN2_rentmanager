@@ -31,6 +31,7 @@ public class RentListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            request.setAttribute("message",request.getParameter("message"));
             request.setAttribute("reservations", this.reservationService.findAll());
         } catch (ServiceException e) {
             throw new RuntimeException(e);

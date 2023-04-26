@@ -34,6 +34,7 @@ public class UserListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            request.setAttribute("message",request.getParameter("message"));
             request.setAttribute("clients", this.clientService.findAll());
         } catch (ServiceException e) {
             throw new RuntimeException(e);

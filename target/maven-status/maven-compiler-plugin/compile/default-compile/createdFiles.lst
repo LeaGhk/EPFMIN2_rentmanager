@@ -5,7 +5,6 @@ com\epf\rentmanager\service\VehicleService.class
 com\epf\rentmanager\persistence\ConnectionManager.class
 com\epf\rentmanager\dao\ReservationDao.class
 com\epf\rentmanager\configuration\WebConfiguration.class
-com\epf\rentmanager\validator\VehicleValidator.class
 com\epf\rentmanager\model\Vehicle.class
 com\epf\rentmanager\servlet\vehicles\VehicleUpdateServlet.class
 com\epf\rentmanager\servlet\HomeServlet.class

@@ -12,12 +12,15 @@ import java.util.List;
 @Service
 public class ClientService {
 
-	private ClientDao clientDao;
+	private final ClientDao clientDao;
+	private final ReservationService reservationService;
 
-	public ClientService(ClientDao clientDao){
+	public ClientService(ClientDao clientDao, ReservationService reservationService){
 		this.clientDao = clientDao;
+		this.reservationService = reservationService;
 	}
-	
+
+
 	public long create(Client client) throws ServiceException {
 		try{
 			return clientDao.create(client);
@@ -27,9 +30,15 @@ public class ClientService {
 		}
 	}
 
-	public void delete(Client client, List<Reservation> reservations) throws ServiceException {
+	public void delete(Client client) throws ServiceException {
 		try{
-			clientDao.delete(client, reservations);
+			List<Reservation> reservations = reservationService.findAll();
+			for(int i=0; i<reservations.size(); i++){
+				if(reservations.get(i).getClient().getId() == client.getId()){
+					reservationService.delete(reservations.get(i));
+				}
+			}
+			clientDao.delete(client);
 		}catch(DaoException e){
 			e.printStackTrace();
 			throw new ServiceException();

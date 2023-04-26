@@ -1,8 +1,11 @@
 package com.epf.rentmanager.servlet.users;
 
 import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.exception.UserIs18yearsException;
+import com.epf.rentmanager.exception.VerifMailException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
+import com.epf.rentmanager.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -46,15 +49,22 @@ public class UserUpdateServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String lastName = request.getParameter("last_name");
-        String firstName = request.getParameter("first_name");
-        String email = request.getParameter("email");
-        LocalDate naissance = LocalDate.parse(request.getParameter("naissance"));
+        try {
+            String lastName = request.getParameter("last_name");
+            String firstName = request.getParameter("first_name");
+            String email = request.getParameter("email");
+            LocalDate naissance = LocalDate.parse(request.getParameter("naissance"));
 
-        Client c = new Client(id, lastName, firstName, naissance, email);
-        clientService.update(c);
+            Client c = new Client(id, lastName, firstName, naissance, email);
+            if(ClientValidator.userIs18years(c)){
+                throw new UserIs18yearsException("L'utilisateur doit être majeur");
+            }
+            clientService.update(c);
 
-        response.sendRedirect("/rentmanager/users");
+            response.sendRedirect("/rentmanager/users");
+        } catch (UserIs18yearsException e) {
+            response.sendRedirect("/rentmanager/users?message=Modification échouée : L'utilisateur doit être majeur");
+        }
     }
 
 

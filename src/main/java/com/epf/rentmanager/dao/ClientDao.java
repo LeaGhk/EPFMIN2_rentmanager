@@ -1,10 +1,13 @@
 package com.epf.rentmanager.dao;
 
 import com.epf.rentmanager.exception.DaoException;
+import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.persistence.ConnectionManager;
+import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.validator.ClientValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -21,10 +24,9 @@ public class ClientDao {
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM Client;";
 	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom = ?, prenom = ?, email = ?, naissance = ? WHERE id = ?;";
-	private static final String DELETE_RESERVATION_QUERY = "DELETE FROM Reservation WHERE id=?;";
-
 
 	private ClientValidator clientValidator = new ClientValidator();
+
 	public long create(Client client) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
@@ -51,14 +53,11 @@ public class ClientDao {
 		return 0;
 	}
 	
-	public void delete(Client client, List<Reservation> reservations) throws DaoException {
+	public void delete(Client client) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(DELETE_CLIENT_QUERY);
 			ps.setLong(1, client.getId());
-
-
-
 			ps.execute();
 			ps.close();
 			connection.close();

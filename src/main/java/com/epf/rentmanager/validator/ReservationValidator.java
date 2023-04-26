@@ -2,9 +2,7 @@ package com.epf.rentmanager.validator;
 
 import com.epf.rentmanager.model.Reservation;
 
-import javax.swing.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -50,5 +48,9 @@ public class ReservationValidator {
         }else{
             return false;
         }
+    }
+
+    public static boolean carRent30jours(Reservation reservation, List<Reservation> reservations){
+        return false;
     }
 }

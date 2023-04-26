@@ -1,13 +1,13 @@
 package com.epf.rentmanager.servlet.rents;
 
-import com.epf.rentmanager.exception.DaoException;
-import com.epf.rentmanager.exception.ServiceException;
+import com.epf.rentmanager.exception.*;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import com.epf.rentmanager.validator.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -68,12 +68,27 @@ public class RentUpdateServlet extends HttpServlet {
             Vehicle v = vehicleService.findById(idv);
             Client c = clientService.findById(idc);
             Reservation r = new Reservation(id, c, v, deb, fin);
+
+            if(ReservationValidator.carRent7jours(r)){
+                throw new CarRent7joursException();
+            } else if(ReservationValidator.carUsePerDay(r, reservationService.findAll())) {
+                throw new CarUsePerDayException();
+            } else if(ReservationValidator.debutIsBeforeFin(r)){
+                throw new DebutIsBeforeFin();
+            }
+
             reservationService.update(r);
 
             response.sendRedirect("/rentmanager/rents");
 
         } catch (ServiceException e) {
             throw new RuntimeException(e);
+        } catch (CarRent7joursException e) {
+            response.sendRedirect("/rentmanager/rents?message=Modification échouée : La location dure 7 jours max");
+        } catch (CarUsePerDayException e) {
+            response.sendRedirect("/rentmanager/rents?message=Modification échouée : La voiture est déjà louée à ces dates-là");
+        } catch (DebutIsBeforeFin e) {
+            response.sendRedirect("/rentmanager/rents?message=Modification échouée : La date de début doit être avant la date de fin.");
         }
     }
 

@@ -64,12 +64,14 @@ public class UserCreateServlet extends HttpServlet {
             request.setAttribute("nom", request.getParameter("last_name"));
             request.setAttribute("prenom", request.getParameter("first_name"));
             request.setAttribute("email", request.getParameter("email"));
+//            doGet(request, response);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/create.jsp").forward(request, response);
         } catch (VerifMailException e) {
             request.setAttribute("message", "Cette adresse mail est déjà utilisée");
             request.setAttribute("nom", request.getParameter("last_name"));
             request.setAttribute("prenom", request.getParameter("first_name"));
             request.setAttribute("naissance", request.getParameter("naissance"));
+//            doGet(request, response);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/create.jsp").forward(request, response);
         }
 

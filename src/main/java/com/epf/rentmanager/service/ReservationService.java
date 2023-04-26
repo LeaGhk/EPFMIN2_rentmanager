@@ -15,7 +15,6 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationDao reservationDao;
-    public static ReservationService instance;
 
     public ReservationService(ReservationDao reservationDao) {
         this.reservationDao = reservationDao;
@@ -56,7 +55,7 @@ public class ReservationService {
         return reservationDao.update(reservation);
     }
 
-        public int count() throws DaoException, SQLException {
+    public int count() throws DaoException, SQLException {
         return reservationDao.count();
     }
 

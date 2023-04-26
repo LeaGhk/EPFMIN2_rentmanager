@@ -12,22 +12,13 @@ import java.util.List;
 @Repository
 public class VehicleDao {
 	
-//	private static VehicleDao instance = null;
-	private VehicleDao() {}
-
-//	public static VehicleDao getInstance() {
-//		if(instance == null) {
-//			instance = new VehicleDao();
-//		}
-//		return instance;
-//	}
-	
 	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES(?, ?, ?);";
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
 	private static final String COUNT_VEHICLES_QUERY = "SELECT COUNT(id) AS count FROM Vehicle;";
 	private static final String UPDATE_VEHICLE_QUERY = "UPDATE Vehicle SET constructeur = ?, modele = ?, nb_places = ? WHERE id = ?;";
+
 
 	public long create(Vehicle vehicle) throws DaoException {
 		try {
@@ -58,8 +49,8 @@ public class VehicleDao {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(DELETE_VEHICLE_QUERY);
 			ps.setLong(1, vehicle.getId());
+
 			ps.execute();
-			ps.executeUpdate();
 			ps.close();
 			connection.close();
 		}catch (SQLException e){
@@ -86,6 +77,7 @@ public class VehicleDao {
 		}
 		return 0;
 	}
+
 	public Vehicle findById(long id) throws DaoException {
 		Vehicle vehicle = new Vehicle();
 		try {
