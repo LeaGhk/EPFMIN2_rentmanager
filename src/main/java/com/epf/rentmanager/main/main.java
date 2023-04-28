@@ -44,7 +44,7 @@ public class main {
 
 
         // Afficher TOUS clients / vehicles / reservations --------------------------------------------------
-            List<Client> clients = clientService.findAll();
+//            List<Client> clients = clientService.findAll();
 //            System.out.println(clients);
 //            List<Vehicle> vehicles = VehicleService.getInstance().findAll();
 //            System.out.println(vehicles);
@@ -95,13 +95,6 @@ public class main {
 //        } catch (DaoException e) {
 //            throw new RuntimeException(e);
 //        }
-
-        LocalDate dBefore = LocalDate.parse("2018-05-21", DateTimeFormatter.ISO_LOCAL_DATE);
-        LocalDate dAfter = LocalDate.parse("2018-05-12", DateTimeFormatter.ISO_LOCAL_DATE);
-
-        long diff = dBefore.until(dAfter, ChronoUnit.DAYS);
-        System.out.println("difference is : "+diff +" days");
-
 
     }
 }

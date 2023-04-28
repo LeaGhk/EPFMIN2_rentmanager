@@ -1,9 +1,6 @@
 package com.epf.rentmanager.servlet.rents;
 
-import com.epf.rentmanager.exception.CarUsePerDayException;
-import com.epf.rentmanager.exception.DebutIsBeforeFin;
-import com.epf.rentmanager.exception.ServiceException;
-import com.epf.rentmanager.exception.CarRent7joursException;
+import com.epf.rentmanager.exception.*;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicle;
@@ -73,6 +70,8 @@ public class RentCreateServlet extends HttpServlet {
                 throw new CarUsePerDayException();
             } else if(ReservationValidator.debutIsBeforeFin(r)){
                 throw new DebutIsBeforeFin();
+            } else if (ReservationValidator.carRent30jours(r, reservationService.findAll())){
+                throw new CarRent30joursException();
             }
 
             reservationService.create(r);
@@ -90,6 +89,9 @@ public class RentCreateServlet extends HttpServlet {
             doGet(request,response);
         } catch (DebutIsBeforeFin e) {
             request.setAttribute("message", "La date de début doit être avant la date de fin.");
+            doGet(request,response);
+        } catch (CarRent30joursException e) {
+            request.setAttribute("message", "La voiture ne peut pas être louée plus de 30 jours");
             doGet(request,response);
         }
 

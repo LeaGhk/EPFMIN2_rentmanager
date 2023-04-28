@@ -2,21 +2,19 @@ package com.epf.rentmanager.servlet.users;
 
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.exception.UserIs18yearsException;
-import com.epf.rentmanager.exception.VerifMailException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.LocalDate;
 
 @WebServlet("/users/update")
 public class UserUpdateServlet extends HttpServlet {

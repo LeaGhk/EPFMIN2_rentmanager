@@ -11,9 +11,6 @@ import java.util.List;
 @Component
 public class ClientValidator {
 
-    // si tout va bien boolean = false
-    // si probleme (mail utilisé ou mineur) boolean = true
-
     public static boolean userIs18years(Client client){
         Period period = Period.between(client.getNaissance(), LocalDate.now());
         int years = Math.abs(period.getYears());

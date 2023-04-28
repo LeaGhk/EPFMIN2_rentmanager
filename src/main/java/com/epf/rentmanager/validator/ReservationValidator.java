@@ -2,6 +2,7 @@ package com.epf.rentmanager.validator;
 
 import com.epf.rentmanager.model.Reservation;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -51,6 +52,10 @@ public class ReservationValidator {
     }
 
     public static boolean carRent30jours(Reservation reservation, List<Reservation> reservations){
-        return false;
+        long jours = 0;
+        boolean b = false;
+
+
+        return b;
     }
 }

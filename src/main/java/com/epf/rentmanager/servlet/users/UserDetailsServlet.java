@@ -24,9 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/users/details")
 public class UserDetailsServlet extends HttpServlet {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     @Autowired
     private ClientService clientService;

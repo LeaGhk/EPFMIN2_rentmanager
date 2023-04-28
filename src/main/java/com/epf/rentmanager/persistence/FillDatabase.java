@@ -1,15 +1,13 @@
 package com.epf.rentmanager.persistence;
 
+import org.h2.tools.DeleteDbFiles;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.h2.tools.DeleteDbFiles;
-
-import com.epf.rentmanager.persistence.ConnectionManager;
 
 public class FillDatabase {
 
