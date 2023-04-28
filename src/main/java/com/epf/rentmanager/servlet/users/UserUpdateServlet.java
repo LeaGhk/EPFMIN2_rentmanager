@@ -31,9 +31,7 @@ public class UserUpdateServlet extends HttpServlet {
 
     int id = 0;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
-
             id = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("idc", id);
             request.setAttribute("client", clientService.findById(id));
@@ -46,7 +44,7 @@ public class UserUpdateServlet extends HttpServlet {
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String lastName = request.getParameter("last_name");
             String firstName = request.getParameter("first_name");
@@ -62,6 +60,8 @@ public class UserUpdateServlet extends HttpServlet {
             response.sendRedirect("/rentmanager/users");
         } catch (UserIs18yearsException e) {
             response.sendRedirect("/rentmanager/users?message=Modification échouée : L'utilisateur doit être majeur");
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
         }
     }
 

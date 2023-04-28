@@ -1,6 +1,7 @@
 package com.epf.rentmanager.model;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 public class Reservation {
     private Long id;
@@ -50,4 +51,13 @@ public class Reservation {
                 ", fin=" + fin +
                 '}';
     }
+
+    public static Comparator<Reservation> ComparatorDate = new Comparator<Reservation>() {
+        @Override
+        public int compare(Reservation r1, Reservation r2) {
+            return r1.getDebut().compareTo(r2.getDebut());
+        }
+    };
+
+
 }

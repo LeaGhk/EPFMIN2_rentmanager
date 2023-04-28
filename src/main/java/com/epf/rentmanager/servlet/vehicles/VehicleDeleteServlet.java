@@ -39,8 +39,6 @@ public class VehicleDeleteServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-//        this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
-
     }
 
 }

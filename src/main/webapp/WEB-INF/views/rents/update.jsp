@@ -41,7 +41,6 @@
                                                     <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
                                                 </c:otherwise>
                                             </c:choose>
-
                                         </c:forEach>
                                         </select>
                                     </div>

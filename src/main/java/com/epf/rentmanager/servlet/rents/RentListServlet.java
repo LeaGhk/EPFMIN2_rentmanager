@@ -37,7 +37,6 @@ public class RentListServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/rents/list.jsp").forward(request, response);
     }
 

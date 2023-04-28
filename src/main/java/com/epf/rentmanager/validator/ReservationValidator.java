@@ -1,12 +1,13 @@
 package com.epf.rentmanager.validator;
 
 import com.epf.rentmanager.model.Reservation;
+import org.springframework.stereotype.Component;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
-
+@Component
 public class ReservationValidator {
 
     public static boolean carUsePerDay(Reservation reservation, List<Reservation> reservations){
@@ -35,27 +36,33 @@ public class ReservationValidator {
 
     public static boolean carRent7jours(Reservation reservation){
         long jours = reservation.getDebut().until(reservation.getFin(), ChronoUnit.DAYS);
-
-        if(jours<=7){
-            return false;
-        }else{
-            return true;
-        }
+        return jours >= 7;
     }
 
     public static boolean debutIsBeforeFin(Reservation reservation){
-        if(reservation.getDebut().isAfter(reservation.getFin())){
-            return true;
-        }else{
-            return false;
-        }
+        return reservation.getDebut().isAfter(reservation.getFin());
     }
 
+    // List reservations = findResaByVehicleId
     public static boolean carRent30jours(Reservation reservation, List<Reservation> reservations){
-        long jours = 0;
+        reservations.add(reservation);
+        Collections.sort(reservations, Reservation.ComparatorDate);
+
+        long jours = reservations.get(0).getDebut().until(reservations.get(0).getFin(), ChronoUnit.DAYS);
         boolean b = false;
 
-
+        for(int i=1; i<reservations.size(); i++){
+            if(reservations.get(i-1).getFin().plusDays(1).isEqual(reservations.get(i).getDebut())){
+                long nb = reservations.get(i).getDebut().until(reservations.get(i).getFin().plusDays(1), ChronoUnit.DAYS);
+                jours = jours + nb;
+                if(jours>=30){
+                    b = true;
+                    break;
+                }
+            }else{
+                jours = 0;
+            }
+        }
         return b;
     }
 }

@@ -20,7 +20,6 @@ public class ClientService {
 		this.reservationService = reservationService;
 	}
 
-
 	public long create(Client client) throws ServiceException {
 		try{
 			return clientDao.create(client);
@@ -62,12 +61,22 @@ public class ClientService {
 		}
 	}
 
-	public int count() throws DaoException, SQLException {
-		return clientDao.count();
+	public int count() throws SQLException, ServiceException {
+		try{
+			return clientDao.count();
+		}catch(DaoException e){
+			e.printStackTrace();
+			throw new ServiceException();
+		}
 	}
 
-	public long update(Client client){
-		return clientDao.update(client);
+	public long update(Client client) throws ServiceException {
+		try{
+			return clientDao.update(client);
+		}catch(DaoException e){
+			e.printStackTrace();
+			throw new ServiceException();
+		}
 	}
 	
 }

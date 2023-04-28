@@ -31,14 +31,14 @@
                                 <div class="form-group">
                                     <label for="last_name" class="col-sm-2 control-label">Nom</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="${client.nom}" required>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="${client.nom}" required pattern=".{3,}" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="first_name" class="col-sm-2 control-label">Prenom</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="${client.prenom}" required>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="${client.prenom}" required pattern=".{3,}" required>
                                     </div>
                                 </div>
 

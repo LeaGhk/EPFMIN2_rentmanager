@@ -44,15 +44,20 @@ public class VehicleUpdateServlet extends HttpServlet {
         }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String marque = request.getParameter("manufacturer");
-        String modele = request.getParameter("modele");
-        int seats = parseInt(request.getParameter("seats"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String marque = request.getParameter("manufacturer");
+            String modele = request.getParameter("modele");
+            int seats = parseInt(request.getParameter("seats"));
 
-        Vehicle v = new Vehicle(id, marque, modele, seats);
-        vehicleService.update(v);
+            Vehicle v = new Vehicle(id, marque, modele, seats);
+            vehicleService.update(v);
 
-        response.sendRedirect("/rentmanager/cars");
+            response.sendRedirect("/rentmanager/cars");
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

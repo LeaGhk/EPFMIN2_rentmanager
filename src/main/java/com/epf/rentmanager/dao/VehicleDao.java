@@ -31,8 +31,7 @@ public class VehicleDao {
 			ResultSet resultSet = ps.getGeneratedKeys();
 
 			if (resultSet.next()) {
-				int id = resultSet.getInt(1);
-				return id;
+				return resultSet.getInt(1);
 			}
 
 			ps.close();
@@ -60,7 +59,7 @@ public class VehicleDao {
 		return vehicle.getId();
 	}
 
-	public long update(Vehicle vehicle){
+	public long update(Vehicle vehicle) throws DaoException {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			PreparedStatement ps = connection.prepareStatement(UPDATE_VEHICLE_QUERY);
@@ -74,6 +73,7 @@ public class VehicleDao {
 			connection.close();
 		}catch (SQLException e){
 			e.printStackTrace();
+			throw new DaoException();
 		}
 		return 0;
 	}
@@ -102,7 +102,7 @@ public class VehicleDao {
 	}
 
 	public List<Vehicle> findAll() throws DaoException {
-		List<Vehicle> vehicles = new ArrayList<Vehicle>();
+		List<Vehicle> vehicles = new ArrayList<>();
 		try {
 			Connection connection = ConnectionManager.getConnection();
 			Statement statement = connection.createStatement();
@@ -140,29 +140,6 @@ public class VehicleDao {
 		throw new DaoException();
 	}
 		return n;
-	}
-
-	public List<Vehicle> findByIdc(long idc) throws DaoException {
-		List<Vehicle> vehicles = new ArrayList<Vehicle>();
-		try {
-			Connection connection = ConnectionManager.getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement(FIND_VEHICLE_QUERY);
-			preparedStatement.setLong(1, idc);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()){
-				int id = rs.getInt("id");
-				String constructeur = rs.getString("constructeur");
-				String modele = rs.getString("modele");
-				int nb_places = rs.getInt("nb_places");
-				vehicles.add(new Vehicle(id, constructeur, modele, nb_places));
-			}
-			connection.close();
-		}catch (SQLException e){
-			e.printStackTrace();
-			throw new DaoException();
-		}
-		return vehicles;
 	}
 
 }

@@ -33,9 +33,9 @@ public class VehicleService {
 	public long delete(Vehicle vehicle) throws ServiceException {
 		try{
 			List<Reservation> reservations = reservationService.findAll();
-			for(int i=0; i<reservations.size(); i++){
-				if(reservations.get(i).getVehicle().getId() == vehicle.getId()){
-					reservationService.delete(reservations.get(i));
+			for (Reservation reservation : reservations) {
+				if (reservation.getVehicle().getId() == vehicle.getId()) {
+					reservationService.delete(reservation);
 				}
 			}
 			return vehicleDao.delete(vehicle);
@@ -63,11 +63,19 @@ public class VehicleService {
 		}
 	}
 
-	public int count() throws DaoException, SQLException {
-		return vehicleDao.count();
+	public int count() throws ServiceException {
+		try {
+			return vehicleDao.count();
+		} catch (DaoException | SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-    public long update(Vehicle vehicle) {
-		return vehicleDao.update(vehicle);
-    }
+    public long update(Vehicle vehicle) throws ServiceException{
+		try {
+			return vehicleDao.update(vehicle);
+		} catch (DaoException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -38,7 +38,7 @@ public class VehicleCreateServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
+            response) throws IOException {
         try {
             String marque = request.getParameter("manufacturer");
             String modele = request.getParameter("modele");
@@ -46,10 +46,8 @@ public class VehicleCreateServlet extends HttpServlet {
             Vehicle v = new Vehicle(marque, modele, seats);
             vehicleService.create(v);
         } catch (ServiceException e) {
-            //catch le probleme pousser dans la requete et afficher sur le site le prb
             throw new RuntimeException(e);
         }
-
         response.sendRedirect("/rentmanager/cars");
     }
 

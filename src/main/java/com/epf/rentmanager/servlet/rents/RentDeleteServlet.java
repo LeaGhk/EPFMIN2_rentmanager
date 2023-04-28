@@ -1,6 +1,5 @@
 package com.epf.rentmanager.servlet.rents;
 
-import com.epf.rentmanager.exception.DaoException;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,6 @@ public class RentDeleteServlet extends HttpServlet {
             reservationService.delete(reservationService.findById(id));
             response.sendRedirect("/rentmanager/rents");
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
-        } catch (DaoException e) {
             throw new RuntimeException(e);
         }
     }

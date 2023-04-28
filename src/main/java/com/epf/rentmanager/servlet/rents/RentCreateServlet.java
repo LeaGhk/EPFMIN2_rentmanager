@@ -70,7 +70,7 @@ public class RentCreateServlet extends HttpServlet {
                 throw new CarUsePerDayException();
             } else if(ReservationValidator.debutIsBeforeFin(r)){
                 throw new DebutIsBeforeFin();
-            } else if (ReservationValidator.carRent30jours(r, reservationService.findAll())){
+            } else if (ReservationValidator.carRent30jours(r, reservationService.findResaByVehicleId(r.getVehicle().getId()))){
                 throw new CarRent30joursException();
             }
 
@@ -81,17 +81,23 @@ public class RentCreateServlet extends HttpServlet {
             throw new RuntimeException(e);
         } catch (CarRent7joursException e) {
             request.setAttribute("message", "La location dure 7 jours max");
-            request.setAttribute("vehicle", request.getParameter("car"));
-            request.setAttribute("client", request.getParameter("client"));
+            request.setAttribute("idvehicle", request.getParameter("car"));
+            request.setAttribute("idclient", request.getParameter("client"));
             doGet(request,response);
         } catch (CarUsePerDayException e) {
             request.setAttribute("message", "La voiture est déjà louée à ces dates-là");
+            request.setAttribute("idvehicle", request.getParameter("car"));
+            request.setAttribute("idclient", request.getParameter("client"));
             doGet(request,response);
         } catch (DebutIsBeforeFin e) {
             request.setAttribute("message", "La date de début doit être avant la date de fin.");
+            request.setAttribute("idvehicle", request.getParameter("car"));
+            request.setAttribute("idclient", request.getParameter("client"));
             doGet(request,response);
         } catch (CarRent30joursException e) {
             request.setAttribute("message", "La voiture ne peut pas être louée plus de 30 jours");
+            request.setAttribute("idvehicle", request.getParameter("car"));
+            request.setAttribute("idclient", request.getParameter("client"));
             doGet(request,response);
         }
 

@@ -40,8 +40,14 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
                                         <c:forEach items="${vehicles}" var="vehicle">
-                                            <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
-                                        </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${vehicle.id == idvehicle}">
+                                                    <option value="${vehicle.id}" selected>${vehicle.constructeur} ${vehicle.modele}</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${vehicle.id}">${vehicle.constructeur} ${vehicle.modele}</option>
+                                                </c:otherwise>
+                                            </c:choose>                                        </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -51,7 +57,14 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="client" name="client">
                                         <c:forEach items="${clients}" var="client">
-                                            <option value="${client.id}">${client.prenom} ${client.nom}</option>
+                                                <c:choose>
+                                                <c:when test="${client.id == idclient}">
+                                                    <option value="${client.id}" selected> ${client.prenom} ${client.nom}</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="${client.id}">${client.prenom} ${client.nom}</option>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:forEach>
                                         </select>
                                     </div>

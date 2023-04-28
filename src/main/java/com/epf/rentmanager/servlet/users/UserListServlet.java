@@ -32,15 +32,12 @@ public class UserListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
             request.setAttribute("message",request.getParameter("message"));
             request.setAttribute("clients", this.clientService.findAll());
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
-
-
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
     }
 

@@ -22,7 +22,6 @@ public class Client {
     public Client(String nom, String prenom, String email){
         this.nom = nom;
         this.prenom = prenom;
-//        this.naissance = dateNaissance;
         this.email = email;
     }
 
